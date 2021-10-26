@@ -5,6 +5,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:misty_master/constants/constants.dart';
 import 'package:misty_master/components/misty_gradient_button.dart';
 import 'package:misty_master/utils/http_utils.dart';
+import 'package:misty_master/constants/extension.dart';
 
 void main() async {
   await _initDependencies();
@@ -23,60 +24,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'misty_master',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'misty_master Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  onTap() {
-    debugPrint("button click");
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return OKToast(
       position: const ToastPosition(
         align: Alignment.bottomCenter,
         offset: -72.0,
       ),
       child: GetMaterialApp(
+        title: 'misty_master',
         initialRoute: "/",
         getPages: RouteConfig.getPages,
         home: Scaffold(
           appBar: AppBar(
-            title: Text(widget.title),
+            title: const Text('1111'),
           ),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'You have pushed the button this many times:',
-                ),
-                const Text('1111'),
                 GradientButton(
-                  colors: const <Color>[
-                    Constants.defaultColor,
-                    Constants.defaultLightColor,
-                  ],
-                  child: const Text("Submit"),
-                  onPressed: onTap,
-                ),
+                    colors: const <Color>[
+                      Constants.defaultColor,
+                      Constants.defaultLightColor,
+                    ],
+                    onPressed: () {
+                      '111111'.toast();
+                    },
+                    child: const Text("Submit")),
               ],
             ),
           ),
