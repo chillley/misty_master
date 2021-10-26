@@ -31,29 +31,8 @@ class MyApp extends StatelessWidget {
       ),
       child: GetMaterialApp(
         title: 'misty_master',
-        initialRoute: "/",
+        initialRoute: RouteConfig.splash,
         getPages: RouteConfig.getPages,
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('1111'),
-          ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GradientButton(
-                    colors: const <Color>[
-                      Constants.defaultColor,
-                      Constants.defaultLightColor,
-                    ],
-                    onPressed: () {
-                      '111111'.toast();
-                    },
-                    child: const Text("Submit")),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

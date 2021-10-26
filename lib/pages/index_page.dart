@@ -5,7 +5,12 @@ class IndexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      body: Column(
+        children: const [
+          Text('首页'),
+        ],
+      ),
+    );
   }
 }
