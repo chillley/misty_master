@@ -16,14 +16,19 @@ extension NullableStringExt on String? {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 12.0,
+              ),
               margin: const EdgeInsets.symmetric(horizontal: 8.0),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [bgc, bgc.withOpacity(0.87)],
+                  colors: [
+                    bgc,
+                    bgc.withOpacity(0.87),
+                  ],
                 ),
                 borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 boxShadow: [
@@ -37,7 +42,10 @@ extension NullableStringExt on String? {
               ),
               child: Text(
                 this!,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             )
           ],
