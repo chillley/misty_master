@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:misty_master/constants/constants.dart';
 import 'package:misty_master/routes/route_config.dart';
@@ -15,14 +14,7 @@ class SplashPage extends StatelessWidget {
 
     // TODO: implement build
     return AnnotatedRegion(
-      value: const SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.transparent,
-        systemNavigationBarDividerColor: Colors.transparent,
-        statusBarColor: Colors.transparent,
-        systemNavigationBarIconBrightness: Brightness.light,
-        statusBarIconBrightness: Brightness.light,
-        statusBarBrightness: Brightness.dark,
-      ),
+      value: lightSystemUiOverlayStyle,
       child: Scaffold(
         body: Stack(
           fit: StackFit.expand,
