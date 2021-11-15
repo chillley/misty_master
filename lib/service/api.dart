@@ -3,5 +3,6 @@
 /// @author xialei
 
 class Api {
-  static const String login = '/login';
+  /// -----------视频列表 ------------
+  static const String getVodList = '/api/getVodList';
 }

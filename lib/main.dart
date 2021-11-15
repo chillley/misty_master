@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:misty_master/pages/splash_page.dart';
 import 'package:misty_master/routes/route_config.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:misty_master/constants/constants.dart';
-import 'package:misty_master/components/misty_gradient_button.dart';
 import 'package:misty_master/utils/http_utils.dart';
-import 'package:misty_master/constants/extension.dart';
 
 void main() async {
   await _initDependencies();
@@ -22,6 +21,13 @@ Future _initDependencies() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  void hideKeyboard(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+      FocusManager.instance.primaryFocus!.unfocus();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return OKToast(
@@ -31,8 +37,18 @@ class MyApp extends StatelessWidget {
       ),
       child: GetMaterialApp(
         title: 'misty_master',
-        initialRoute: RouteConfig.splash,
+        initialRoute: '/',
+        builder: (context, child) => Scaffold(
+          // 点击空白处关闭键盘
+          body: GestureDetector(
+            onTap: () {
+              hideKeyboard(context);
+            },
+            child: child,
+          ),
+        ),
         getPages: RouteConfig.getPages,
+        home: const SplashPage(),
       ),
     );
   }

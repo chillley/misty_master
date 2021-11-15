@@ -1,13 +1,12 @@
 import 'package:get/get.dart';
 import 'package:misty_master/pages/discover_page.dart';
-import 'package:misty_master/pages/index_page.dart';
+import 'package:misty_master/pages/index/index_page.dart';
 import 'package:misty_master/pages/mine_page.dart';
 import 'package:misty_master/pages/splash_page.dart';
 
 /// @description   GetX Routing profile
-/// @date   
+/// @date
 /// @author xialei
-
 
 class RouteConfig {
   static const String splash = "/splash";

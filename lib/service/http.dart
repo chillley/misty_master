@@ -1,9 +1,9 @@
 import 'package:misty_master/service/api.dart';
 import 'package:misty_master/utils/http_utils.dart';
 
-class Service {
+class Http {
   /// 登录接口
-  static login(data) {
-    return HttpUtils.post(Api.login, data: data);
+  static getVodList(data) {
+    return HttpUtils.post(Api.getVodList, data: data);
   }
 }

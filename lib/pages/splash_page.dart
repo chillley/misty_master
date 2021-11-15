@@ -8,10 +8,8 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 2000), () {
-      Get.offNamed(RouteConfig.index);
-    });
-
+    WidgetsBinding.instance!.addPostFrameCallback(
+        (_) async => await Get.offNamed(RouteConfig.index));
     // TODO: implement build
     return AnnotatedRegion(
       value: lightSystemUiOverlayStyle,
@@ -21,7 +19,10 @@ class SplashPage extends StatelessWidget {
           children: [
             Container(
               color: Constants.splashPageBgc,
-              child: Image.asset("assets/images/splash.png"),
+              child: Image.asset(
+                "assets/images/splash.png",
+                fit: BoxFit.fitHeight,
+              ),
             ),
           ],
         ),
