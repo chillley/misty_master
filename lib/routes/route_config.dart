@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:misty_master/pages/discover_page.dart';
+import 'package:misty_master/pages/index/index_controller.dart';
 import 'package:misty_master/pages/index/index_page.dart';
 import 'package:misty_master/pages/mine_page.dart';
 import 'package:misty_master/pages/splash_page.dart';
@@ -19,7 +20,13 @@ class RouteConfig {
 
   static final List<GetPage> getPages = [
     GetPage(name: splash, page: () => const SplashPage()),
-    GetPage(name: index, page: () => const IndexPage()),
+    GetPage(
+      name: index,
+      page: () => const IndexPage(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<IndexController>(() => IndexController());
+      }),
+    ),
     GetPage(name: discover, page: () => const DiscoverPage()),
     GetPage(name: mine, page: () => const MinePage())
   ];

@@ -3,6 +3,8 @@
 /// @author xialei
 
 class Api {
-  /// -----------视频列表 ------------
+
   static const String getVodList = '/api/getVodList';
+  static const String getLevel1TypeList = '/api/getLevel1TypeList';
+  static const String getVodListByType = '/api/getVodListByType';
 }

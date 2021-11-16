@@ -35,6 +35,7 @@ dependencies:
   path_provider: ^2.0.5
   #Flutter 监听网络连接状态
   connectivity_plus: ^2.0.2
+  extended_image: ^5.1.3
 
 
 dev_dependencies:

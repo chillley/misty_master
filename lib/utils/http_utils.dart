@@ -5,10 +5,11 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 
 // import 'package:flutter/foundation.dart';
-import 'package:misty_master/utils/toast_utils.dart';
+
 
 // import 'package:path_provider/path_provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:misty_master/constants/constants.dart';
 
 /// @description  网络请求封装
 /// @date 2021/10/25 10:48
@@ -36,12 +37,12 @@ class HttpInterceptor extends Interceptor {
       var connectivityResult = await (Connectivity().checkConnectivity());
       // 判断是否联网
       if (connectivityResult == ConnectivityResult.none) {
-        ToastUtils.toast('当前网络不可用,请检查网络设置');
+        '当前网络不可用,请检查网络设置'.toast();
       }
     }
 
     if (err.response != null && err.response!.statusCode != 200) {
-      ToastUtils.toast('网络错误');
+      '网络错误'.toast();
     }
 
     return super.onError(err, handler);
@@ -65,7 +66,13 @@ class HttpUtils {
     // }
     // 添加cookie进入临时路径保存
     // var cookieJar = PersistCookieJar(storage: FileStorage(tempPath));
-    _dio = Dio(BaseOptions(baseUrl: baseUrl, followRedirects: false));
+    _dio = Dio(
+      BaseOptions(
+          baseUrl: baseUrl,
+          followRedirects: false,
+          connectTimeout: 3000,
+          receiveTimeout: 3000),
+    );
     // dio 添加cookie管理 添加日志打印
     _dio
       // ..interceptors.add(CookieManager(cookieJar))

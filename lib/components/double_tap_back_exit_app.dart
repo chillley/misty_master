@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:misty_master/utils/toast_utils.dart';
+import 'package:oktoast/oktoast.dart';
+import 'package:misty_master/constants/constants.dart';
 
 /// 双击返回退出
 class DoubleTapBackExitApp extends StatefulWidget {
@@ -34,10 +35,10 @@ class _DoubleTapBackExitAppState extends State<DoubleTapBackExitApp> {
     if (_lastTime == null ||
         DateTime.now().difference(_lastTime!) > widget.duration) {
       _lastTime = DateTime.now();
-      ToastUtils.toast('再次点击退出应用');
+      '再次点击退出应用'.toast();
       return Future.value(false);
     }
-    ToastUtils.closeToast();
+    dismissAllToast();
 
     /// 不推荐使用 `dart:io` 的 exit(0)
     await SystemNavigator.pop();

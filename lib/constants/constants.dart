@@ -1,5 +1,6 @@
 export 'screens.dart';
 export 'top_const.dart';
+export 'extension.dart';
 
 import 'package:flutter/material.dart';
 
