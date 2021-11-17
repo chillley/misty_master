@@ -33,6 +33,9 @@ class IndexController extends GetxController with SingleGetTickerProviderMixin {
     await getLevel1TypeList();
     tabController =
         TabController(initialIndex: 0, length: tabList.length, vsync: this);
+    tabController.addListener(() {
+      getVodListByType(tabList[tabController.index].typeId);
+    });
     await getVodListByType(tabList[0].typeId);
   }
 

@@ -1,11 +1,13 @@
 // import 'dart:io';
 
+import 'dart:io';
+
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 
 // import 'package:flutter/foundation.dart';
-
 
 // import 'package:path_provider/path_provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -40,18 +42,14 @@ class HttpInterceptor extends Interceptor {
         '当前网络不可用,请检查网络设置'.toast();
       }
     }
-
-    if (err.response != null && err.response!.statusCode != 200) {
-      '网络错误'.toast();
-    }
-
+    '网络错误'.toast();
     return super.onError(err, handler);
   }
 }
 
 class HttpUtils {
   // 请求BaseUrl
-  static const String baseUrl = 'http://10.10.10.32:7001';
+  static const String baseUrl = 'http://111.229.255.133:7001';
 
   static late final Dio _dio;
 
@@ -76,9 +74,18 @@ class HttpUtils {
     // dio 添加cookie管理 添加日志打印
     _dio
       // ..interceptors.add(CookieManager(cookieJar))
-      ..interceptors.add(LogInterceptor(responseBody: true))
+      ..interceptors
+          .add(LogInterceptor(requestBody: false, responseBody: false))
       // 添加拦截器
       ..interceptors.add(HttpInterceptor());
+    /// 不校验https证书
+    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) {
+        return true;
+      };
+    };
   }
 
   // 封装post方法

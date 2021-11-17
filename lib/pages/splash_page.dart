@@ -8,8 +8,11 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!.addPostFrameCallback(
-        (_) async => await Get.offNamed(RouteConfig.index));
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(seconds: 1), () {
+        Get.offNamed(RouteConfig.index);
+      });
+    });
     // TODO: implement build
     return AnnotatedRegion(
       value: lightSystemUiOverlayStyle,
