@@ -1,9 +1,14 @@
 import 'package:get/get.dart';
 import 'package:misty_master/pages/discover_page.dart';
-import 'package:misty_master/pages/index/index_controller.dart';
+import 'package:misty_master/pages/index/index_binding.dart';
+
 import 'package:misty_master/pages/index/index_page.dart';
+import 'package:misty_master/pages/main/main_binding.dart';
 import 'package:misty_master/pages/mine_page.dart';
-import 'package:misty_master/pages/splash_page.dart';
+import 'package:misty_master/pages/search/search_binding.dart';
+import 'package:misty_master/pages/search/search_page.dart';
+import 'package:misty_master/pages/splash/splash_binding.dart';
+import 'package:misty_master/pages/splash/splash_page.dart';
 
 /// @description   GetX Routing profile
 /// @date
@@ -18,16 +23,25 @@ class RouteConfig {
 
   static const String mine = "/mine";
 
+  static const String search = "/search";
+
   static final List<GetPage> getPages = [
-    GetPage(name: splash, page: () => const SplashPage()),
+    GetPage(
+      name: splash,
+      page: () => const SplashPage(),
+      binding: SplashBinding(),
+    ),
     GetPage(
       name: index,
-      page: () => const IndexPage(),
-      binding: BindingsBuilder(() {
-        Get.lazyPut<IndexController>(() => IndexController());
-      }),
+      page: () => IndexPage(),
+      bindings: [IndexBinding(), MainBinding()],
     ),
     GetPage(name: discover, page: () => const DiscoverPage()),
-    GetPage(name: mine, page: () => const MinePage())
+    GetPage(name: mine, page: () => const MinePage()),
+    GetPage(
+      name: search,
+      page: () => const SearchPage(),
+      binding: SearchBinding(),
+    ),
   ];
 }

@@ -6,7 +6,7 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 // import 'package:flutter/foundation.dart';
 
 // import 'package:path_provider/path_provider.dart';
@@ -21,6 +21,7 @@ import 'package:misty_master/constants/constants.dart';
 class HttpInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    SmartDialog.showLoading(msg: '加载中...');
     options
         .copyWith(headers: {"content-type": "application/json; charset=utf-8"});
     return super.onRequest(options, handler);
@@ -28,8 +29,7 @@ class HttpInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    print(
-        'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
+    SmartDialog.dismiss(status: SmartStatus.loading);
     return super.onResponse(response, handler);
   }
 
@@ -40,9 +40,11 @@ class HttpInterceptor extends Interceptor {
       // 判断是否联网
       if (connectivityResult == ConnectivityResult.none) {
         '当前网络不可用,请检查网络设置'.toast();
+        return super.onError(err, handler);
       }
     }
     '网络错误'.toast();
+    SmartDialog.dismiss(status: SmartStatus.loading);
     return super.onError(err, handler);
   }
 }
@@ -78,14 +80,6 @@ class HttpUtils {
           .add(LogInterceptor(requestBody: false, responseBody: false))
       // 添加拦截器
       ..interceptors.add(HttpInterceptor());
-    /// 不校验https证书
-    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) {
-        return true;
-      };
-    };
   }
 
   // 封装post方法

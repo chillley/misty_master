@@ -10,3 +10,4 @@ const SystemUiOverlayStyle lightSystemUiOverlayStyle = SystemUiOverlayStyle(
   statusBarIconBrightness: Brightness.light,
   statusBarBrightness: Brightness.dark,
 );
+

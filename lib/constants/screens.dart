@@ -1,4 +1,5 @@
-import 'dart:ui' as ui;
+import 'dart:io';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,11 +9,15 @@ export 'package:flutter_screenutil/flutter_screenutil.dart';
 /// @date 2021/10/22 13:50
 /// @author xialei
 class Screens {
-  static MediaQueryData get mediaQuery => MediaQueryData.fromWindow(ui.window);
+  static final MediaQueryData mediaQueryData =
+      MediaQueryData.fromWindow(window);
 
-  static double get width => mediaQuery.size.width;
+  static double get width => mediaQueryData.size.width;
 
-  static double get height => mediaQuery.size.height;
+  static double get height => mediaQueryData.size.height;
+
+  static final EdgeInsets safePadding = mediaQueryData.padding;
+  static final double statusBarHeight = safePadding.top;
 
   /// Initialize the screen adaptation method
   static void init() {
@@ -24,3 +29,5 @@ class Screens {
     ScreenUtil().setSp(14);
   }
 }
+
+final isMobile = Platform.isIOS || Platform.isAndroid;
