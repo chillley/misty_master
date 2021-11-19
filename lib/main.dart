@@ -64,20 +64,19 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return FlutterSmartDialog(
           child: OKToast(
-            position: const ToastPosition(
-              align: Alignment.bottomCenter,
-              offset: -72.0,
-            ),
-            child: Scaffold(
-              // 点击空白处关闭键盘
-              body: GestureDetector(
-                onTap: () {
-                  hideKeyboard(context);
-                },
-                child: child,
+              position: const ToastPosition(
+                align: Alignment.bottomCenter,
+                offset: -72.0,
               ),
-            ),
-          ),
+              child: Scaffold(
+                // 点击空白处关闭键盘
+                body: GestureDetector(
+                  onTap: () {
+                    hideKeyboard(context);
+                  },
+                  child: child,
+                ),
+              )),
         );
       },
       getPages: RouteConfig.getPages,
