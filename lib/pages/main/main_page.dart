@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:misty_master/constants/constants.dart';
 import 'package:misty_master/model/vod_entity.dart';
+import 'package:misty_master/routes/route_config.dart';
 import 'package:misty_master/utils/tools_utils.dart';
 import 'main_controller.dart';
 
@@ -151,6 +152,7 @@ class MainPage extends StatelessWidget {
     AppBar _appBar() {
       return AppBar(
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
         titleTextStyle: const TextStyle(
           color: Colors.black,
           fontSize: 20.0,
@@ -159,7 +161,9 @@ class MainPage extends StatelessWidget {
         title: const Text('首页'),
         actions: <Widget>[
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(RouteConfig.search);
+            },
             icon: const Icon(Icons.search),
             color: Colors.black,
           )

@@ -11,6 +11,15 @@ class SearchPage extends StatelessWidget {
     final controller = Get.find<SearchController>();
     final state = Get.find<SearchController>().state;
 
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Container(
+          padding: const EdgeInsets.all(5),
+          child: Row(
+            children: const [Expanded(child: TextField()), Text('搜索')],
+          ),
+        ),
+      ),
+    );
   }
 }
