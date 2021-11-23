@@ -31,6 +31,40 @@ class MainPage extends StatelessWidget {
                     itemCount: state.vodList.length,
                     itemBuilder: (_, index) {
                       Vod_entity vod = state.vodList[index];
+                      List vodPlayFrom = vod.vodPlayFrom!.split("\$\$\$");
+                      List<Widget> playbackSource = [
+                        const Text('播放源:'),
+                        const SizedBox(
+                          width: 5,
+                        )
+                      ];
+                      playbackSource.addAll(
+                        vodPlayFrom.map(
+                          (value) => Wrap(
+                            runSpacing: 5,
+                            spacing: 5,
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(3.0)),
+                                child: Container(
+                                  color: Constants.defaultColor,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 3),
+                                  child: Text(
+                                    value,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 12.0),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              )
+                            ],
+                          ),
+                        ),
+                      );
                       return Container(
                         margin: const EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 10),
@@ -137,6 +171,17 @@ class MainPage extends StatelessWidget {
                                     maxLines: 4,
                                     overflow: TextOverflow.ellipsis,
                                   ),
+                                  const SizedBox(
+                                    height: 13,
+                                  ),
+                                  Wrap(
+                                    alignment: WrapAlignment.start,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    runSpacing: 5,
+                                    spacing: 5,
+                                    children: playbackSource,
+                                  )
                                 ],
                               ),
                             )
