@@ -21,7 +21,6 @@ Future _initDependencies() async {
     primaryColor: Constants.defaultColor,
     primaryColorLight: Constants.defaultColor,
     primaryColorDark: Constants.defaultColor,
-    appBarTheme: const AppBarTheme(backgroundColor: Constants.defaultColor),
     colorScheme:
         ColorScheme.fromSwatch().copyWith(secondary: Constants.defaultColor),
   ));

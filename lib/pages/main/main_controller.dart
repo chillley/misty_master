@@ -20,7 +20,6 @@ class MainController extends GetxController with SingleGetTickerProviderMixin {
     state.vodListPageIndex = 1;
     state.vodListFinished = false;
     await getVodListByType(state.tabList[tabController.index].typeId);
-    "数据刷新完成".toast();
   }
 
   Future getVodListByType(type) async {
@@ -81,9 +80,4 @@ class MainController extends GetxController with SingleGetTickerProviderMixin {
     update();
   }
 
-  @override
-  void onClose() {
-    // TODO: implement onClose
-    super.onClose();
-  }
 }
