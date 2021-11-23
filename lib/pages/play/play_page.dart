@@ -11,6 +11,10 @@ class PlayPage extends StatelessWidget {
     final controller = Get.find<PlayController>();
     final state = Get.find<PlayController>().state;
 
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('播放页面'),
+      ),
+    );
   }
 }

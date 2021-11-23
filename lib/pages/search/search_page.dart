@@ -14,9 +14,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<SearchController>();
-    final state = Get
-        .find<SearchController>()
-        .state;
+    final state = Get.find<SearchController>().state;
 
     Widget _listItem() {
       return GetBuilder<SearchController>(
@@ -32,36 +30,29 @@ class SearchPage extends StatelessWidget {
                     List vodPlayFrom = vod.vodPlayFrom!.split("\$\$\$");
                     List<Widget> playbackSource = [
                       const Text('播放源:'),
-                      const SizedBox(
-                        width: 5,
-                      )
                     ];
                     playbackSource.addAll(
                       vodPlayFrom.map(
-                            (value) =>
-                            Wrap(
-                              runSpacing: 5,
-                              spacing: 5,
-                              children: [
-                                ClipRRect(
-                                  borderRadius:
+                        (value) => Wrap(
+                          runSpacing: 5,
+                          spacing: 5,
+                          children: [
+                            ClipRRect(
+                              borderRadius:
                                   const BorderRadius.all(Radius.circular(3.0)),
-                                  child: Container(
-                                    color: Constants.defaultColor,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 3),
-                                    child: Text(
-                                      value,
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 12.0),
-                                    ),
-                                  ),
+                              child: Container(
+                                color: Constants.defaultColor,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 3),
+                                child: Text(
+                                  value,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 12.0),
                                 ),
-                                const SizedBox(
-                                  width: 5,
-                                )
-                              ],
+                              ),
                             ),
+                          ],
+                        ),
                       ),
                     );
                     return Container(
@@ -214,7 +205,7 @@ class SearchPage extends StatelessWidget {
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
                       border: Border.all(color: Colors.black12, width: 1.0),
                       color: Colors.white10),
-                  height: 42,
+                  height: 38,
                   child: TextField(
                     controller: controller.textEditingController,
                     textInputAction: TextInputAction.search,
@@ -223,17 +214,16 @@ class SearchPage extends StatelessWidget {
                     cursorColor: Constants.defaultColor,
                     autofocus: true,
                     decoration: const InputDecoration(
-                      contentPadding:
-                      EdgeInsets.symmetric(vertical: 4, horizontal: 1.0),
+                      contentPadding: EdgeInsets.only(bottom: 10),
                       prefixIcon: Padding(
-                        padding: EdgeInsets.only(left: 5, top: 5, right: 10),
+                        padding: EdgeInsets.only(left: 5, right: 10),
                         child: Icon(
                           Icons.search,
                           color: Colors.black,
                         ),
                       ),
                       prefixIconConstraints:
-                      BoxConstraints(maxWidth: 30, minHeight: 25),
+                          BoxConstraints(maxWidth: 30, minHeight: 25),
                       border: InputBorder.none,
                       hintText: '请输入剧名等关键字',
                       hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
