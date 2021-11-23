@@ -11,7 +11,7 @@
     <!-- 获取当前设备存储权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
-            android:label="misty_master"
+            android:label="蒙蒙的休息室"
             android:icon="@mipmap/ic_launcher"
             android:usesCleartextTraffic="true">
         <activity

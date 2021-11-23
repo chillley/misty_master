@@ -27,7 +27,7 @@ class IndexPage extends StatelessWidget {
   _bottomNavigationBar() {
     List<BottomNavigationBarItem> bottomNavigationItems = state.bottomNavigation
         .map((item) => BottomNavigationBarItem(
-            label: item['label'], icon: Icon(item['icon'])))
+            title: Text(item['label']), icon: Icon(item['icon'])))
         .toList();
     return Obx(
       () => BottomNavigationBar(
@@ -39,8 +39,8 @@ class IndexPage extends StatelessWidget {
         selectedIconTheme: const IconThemeData(color: Constants.defaultColor),
         selectedItemColor: Constants.defaultColor,
         iconSize: 21.0,
-        selectedFontSize: 12.sp,
-        unselectedFontSize: 11.sp,
+        selectedFontSize: 12.0,
+        unselectedFontSize: 11.0,
         showUnselectedLabels: true,
         showSelectedLabels: true,
         items: bottomNavigationItems,

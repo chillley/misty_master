@@ -8,9 +8,6 @@ class IndexState {
 
   IndexState() {
     ///Initialize variables
-
-
-
     bottomNavigation = [
       {'label': '首页', 'icon': Icons.home},
       {'label': '发现', 'icon': Icons.find_in_page},

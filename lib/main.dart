@@ -15,8 +15,6 @@ void main() async {
 }
 
 Future _initDependencies() async {
-  // 初始化适配UI
-  Screens.init();
   // 初始化Dio请求
   await HttpUtils.init();
   Get.changeTheme(ThemeData(

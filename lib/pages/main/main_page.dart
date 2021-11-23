@@ -34,13 +34,13 @@ class MainPage extends StatelessWidget {
                       return Container(
                         margin: const EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 10),
-                        height: 160.h,
+                        height: 160,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width: 100.w,
-                              height: 160.h,
+                              width: 100,
+                              height: 160,
                               child: Stack(
                                 children: [
                                   ClipRRect(
@@ -48,8 +48,8 @@ class MainPage extends StatelessWidget {
                                         Radius.circular(6.0)),
                                     child: ExtendedImage.network(
                                       isNullText(vod.vodPic),
-                                      width: 110.w,
-                                      height: 160.h,
+                                      width: 110,
+                                      height: 160,
                                       cache: true,
                                       fit: BoxFit.cover,
                                       loadStateChanged:
