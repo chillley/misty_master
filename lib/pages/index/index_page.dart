@@ -27,7 +27,7 @@ class IndexPage extends StatelessWidget {
   _bottomNavigationBar() {
     List<BottomNavigationBarItem> bottomNavigationItems = state.bottomNavigation
         .map((item) => BottomNavigationBarItem(
-            title: Text(item['label']), icon: Icon(item['icon'])))
+            label: item['label'], icon: Icon(item['icon'])))
         .toList();
     return Obx(
       () => BottomNavigationBar(
