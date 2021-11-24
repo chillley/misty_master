@@ -5,6 +5,10 @@ import 'play_state.dart';
 class PlayController extends GetxController {
   final PlayState state = PlayState();
 
+  Future getVodDetails() async {
+
+  }
+
   @override
   void onReady() {
     // TODO: implement onReady

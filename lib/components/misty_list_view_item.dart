@@ -49,7 +49,7 @@ class MistyListViewItem extends StatelessWidget {
             ),
           );
 
-          return GestureDetector(
+          return InkWell(
             child: Container(
               margin:
                   const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
