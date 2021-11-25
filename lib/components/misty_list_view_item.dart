@@ -170,7 +170,7 @@ class MistyListViewItem extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Get.toNamed(RouteConfig.play);
+              Get.toNamed(RouteConfig.play, arguments: vod.vodId);
             },
           );
         });

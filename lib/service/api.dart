@@ -8,4 +8,8 @@ class Api {
   static const String getLevel1TypeList = '/api/getLevel1TypeList';
 
   static const String getVodListByType = '/api/getVodListByType';
+
+  static const String getVodDetails = '/api/getVodDetails';
+
+  static const String getVodPlayVideoSourceFormat = '/api/getVodPlayVideoSourceFormat';
 }

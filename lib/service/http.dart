@@ -13,4 +13,13 @@ class Http {
   static getVodListByType(data) {
     return HttpUtils.post(Api.getVodListByType, data: data);
   }
+
+  static getVodDetails(data) {
+    return HttpUtils.post(Api.getVodDetails, data: data);
+  }
+
+  static getVodPlayVideoSourceFormat(data) {
+    return HttpUtils.post(Api.getVodPlayVideoSourceFormat, data: data);
+  }
+
 }
