@@ -70,8 +70,8 @@ class HttpUtils {
       BaseOptions(
           baseUrl: baseUrl,
           followRedirects: false,
-          connectTimeout: 3000,
-          receiveTimeout: 3000),
+          connectTimeout: 30000,
+          receiveTimeout: 30000),
     );
     // dio 添加cookie管理 添加日志打印
     _dio

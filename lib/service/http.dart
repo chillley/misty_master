@@ -22,4 +22,8 @@ class Http {
     return HttpUtils.post(Api.getVodPlayVideoSourceFormat, data: data);
   }
 
+  static getFqVideosPlayerListByFq(data) {
+    return HttpUtils.post(Api.getFqVideosPlayerListByFq, data: data);
+  }
+
 }

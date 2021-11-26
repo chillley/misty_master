@@ -1,5 +1,6 @@
 import 'package:fijkplayer/fijkplayer.dart';
-import 'package:fijkplayer_skin/fijkplayer_skin.dart';
+import 'package:misty_master/constants/constants.dart';
+import 'package:misty_master/fijkplayer_skin/fijkplayer_skin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:misty_master/utils/tools_utils.dart';
@@ -39,7 +40,7 @@ class PlayPage extends StatelessWidget {
     ShowConfigAbs vCfg = PlayerShowConfig();
 
     // 剧集 tabCon
-    List<Widget> createTabConList() {
+    List<Widget> _tabConList() {
       List<Widget> list = [];
       state.playerVodTabs.value.video!.asMap().keys.forEach((int tabIdx) {
         List<Widget> _playListButtons = state
@@ -47,31 +48,27 @@ class PlayPage extends StatelessWidget {
             .asMap()
             .keys
             .map((int activeIdx) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 5, right: 5),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
+          return ElevatedButton(
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                elevation: MaterialStateProperty.all(0),
-                backgroundColor: MaterialStateProperty.all(
-                    tabIdx == state.curTabIdx.value &&
-                            activeIdx == state.curActiveIdx.value
-                        ? Colors.red
-                        : Colors.blue),
               ),
-              onPressed: () async {
-                controller.changePlayTheSource(tabIdx, activeIdx);
-              },
-              child: Text(
-                state.playerVodTabs.value.video![tabIdx]!.list![activeIdx]!
-                    .name!,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
+              elevation: MaterialStateProperty.all(0),
+              backgroundColor: MaterialStateProperty.all(
+                  tabIdx == state.curTabIdx.value &&
+                          activeIdx == state.curActiveIdx.value
+                      ? Constants.defaultColor
+                      : Constants.defaultLightColor),
+            ),
+            onPressed: () async {
+              controller.changePlayTheSource(tabIdx, activeIdx);
+            },
+            child: Text(
+              state.playerVodTabs.value.video![tabIdx]!.list![activeIdx]!.name!,
+              style: const TextStyle(
+                color: Colors.white,
               ),
             ),
           );
@@ -82,6 +79,10 @@ class PlayPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 5, right: 5),
               child: Wrap(
+                alignment: WrapAlignment.start,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                runSpacing: 3,
+                spacing: 4,
                 direction: Axis.horizontal,
                 children: _playListButtons,
               ),
@@ -98,11 +99,13 @@ class PlayPage extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(24),
           child: AppBar(
-              backgroundColor: Colors.black,
+              backgroundColor: Colors.white,
               automaticallyImplyLeading: false,
               primary: false,
               elevation: 0,
               title: Obx(() => (TabBar(
+                    labelColor: Colors.black,
+                    indicatorColor: Constants.defaultColor,
                     tabs: state.playerVodTabs.value.video!
                         .map((e) => Tab(text: e!.name!))
                         .toList(),
@@ -111,10 +114,10 @@ class PlayPage extends StatelessWidget {
                   )))),
         ),
         body: Container(
-          color: Colors.black87,
+          color: Colors.white,
           child: Obx(() => (TabBarView(
                 controller: controller.tabController,
-                children: createTabConList(),
+                children: _tabConList(),
               ))),
         ),
       );

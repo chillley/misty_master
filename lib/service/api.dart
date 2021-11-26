@@ -12,4 +12,6 @@ class Api {
   static const String getVodDetails = '/api/getVodDetails';
 
   static const String getVodPlayVideoSourceFormat = '/api/getVodPlayVideoSourceFormat';
+
+  static const String getFqVideosPlayerListByFq = '/api/getFqVideosPlayerListByFq';
 }

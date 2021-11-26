@@ -197,13 +197,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.10.0"
-  fijkplayer_skin:
-    dependency: "direct main"
-    description:
-      name: fijkplayer_skin
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.2.8"
   file:
     dependency: transitive
     description:
@@ -554,7 +547,7 @@ packages:
     source: hosted
     version: "2.1.0"
   wakelock:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: wakelock
       url: "https://pub.flutter-io.cn"

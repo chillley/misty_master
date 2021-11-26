@@ -5,6 +5,9 @@ import 'discover_state.dart';
 class DiscoverController extends GetxController {
   final DiscoverState state = DiscoverState();
 
+
+
+
   @override
   void onReady() {
     // TODO: implement onReady

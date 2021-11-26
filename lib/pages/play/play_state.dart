@@ -1,4 +1,4 @@
-import 'package:fijkplayer_skin/schema.dart';
+import 'package:misty_master/fijkplayer_skin/schema.dart';
 import 'package:get/get.dart';
 import 'package:misty_master/model/vod_entity.dart';
 

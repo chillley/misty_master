@@ -1,5 +1,5 @@
 import 'package:fijkplayer/fijkplayer.dart';
-import 'package:fijkplayer_skin/schema.dart';
+import 'package:misty_master/fijkplayer_skin/schema.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:misty_master/model/vod_entity.dart';
@@ -34,14 +34,29 @@ class PlayController extends GetxController with SingleGetTickerProviderMixin {
     }
   }
 
+  Future getFqVideosPlayerListByFq(fq) async {
+    Map data = {'fq': fq};
+    String url = '';
+    Map<String, dynamic> mapRes = await Http.getFqVideosPlayerListByFq(data);
+    if (mapRes['success'] == 1) {
+      url = mapRes['data'];
+    }
+    return url;
+  }
+
   changePlayTheSource(tabIdx, activeIdx) async {
     state.curTabIdx.value = tabIdx;
     state.curActiveIdx.value = activeIdx;
 
     String nextVideoUrl =
         state.playerVodTabs.value.video![tabIdx]!.list![activeIdx]!.url!;
-    // 切换播放源
-    // 如果不是自动开始播放，那么先执行stop
+
+    String? fq = state.playerVodTabs.value.video![state.curTabIdx.value]!
+        .list![state.curActiveIdx.value]!.fq;
+    if (nextVideoUrl == 'fq') {
+      nextVideoUrl = await getFqVideosPlayerListByFq(fq);
+    }
+
     if (player.value.state == FijkState.completed) {
       await player.stop();
     }
@@ -65,6 +80,19 @@ class PlayController extends GetxController with SingleGetTickerProviderMixin {
       length: state.playerVodTabs.value.video!.length,
       vsync: this,
     );
+    String nextVideoUrl = state.playerVodTabs.value
+        .video![state.curTabIdx.value]!.list![state.curActiveIdx.value]!.url!;
+    String? fq = state.playerVodTabs.value.video![state.curTabIdx.value]!
+        .list![state.curActiveIdx.value]!.fq;
+    if (nextVideoUrl == 'fq') {
+      nextVideoUrl = await getFqVideosPlayerListByFq(fq);
+    }
+    if (player.value.state == FijkState.completed) {
+      await player.stop();
+    }
+    await player.reset().then((_) async {
+      player.setDataSource(nextVideoUrl, autoPlay: true);
+    });
     super.onReady();
   }
 
