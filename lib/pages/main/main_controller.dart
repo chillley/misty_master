@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:misty_master/constants/extension.dart';
 import 'package:misty_master/model/type_entity.dart';
 import 'package:misty_master/model/vod_entity.dart';
 import 'package:misty_master/service/http.dart';

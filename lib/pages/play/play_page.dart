@@ -1,6 +1,6 @@
 import 'package:fijkplayer/fijkplayer.dart';
-import 'package:misty_master/constants/constants.dart';
 import 'package:misty_master/fijkplayer_skin/fijkplayer_skin.dart';
+import 'package:misty_master/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:misty_master/utils/tools_utils.dart';

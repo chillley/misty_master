@@ -324,6 +324,7 @@ class _CustomFijkPanelState extends State<CustomFijkPanel>
         automaticallyImplyLeading: false,
         elevation: 0.1,
         title: TabBar(
+
           labelColor: Colors.white,
           labelStyle: TextStyle(
             color: Colors.white,
@@ -335,7 +336,7 @@ class _CustomFijkPanelState extends State<CustomFijkPanel>
             fontSize: 14,
           ),
           indicator: BoxDecoration(
-            color: Colors.purple[700],
+            color: Constants.defaultColor,
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
           tabs:
@@ -363,19 +364,19 @@ class _CustomFijkPanelState extends State<CustomFijkPanel>
           .keys
           .map((int activeIdx) {
         return Padding(
-          padding: EdgeInsets.only(left: 5, right: 5),
+          padding: const EdgeInsets.only(left: 5, right: 5),
           child: ElevatedButton(
             style: ButtonStyle(
               shape: MaterialStateProperty.all(
                 RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(30),
                 ),
               ),
               elevation: MaterialStateProperty.all(0),
               backgroundColor: MaterialStateProperty.all(
                   tabIdx == widget.curTabIdx && activeIdx == widget.curActiveIdx
-                      ? Constants.defaultColor
-                      : Constants.defaultLightColor),
+                      ? const Color(0xFFFE5767)
+                      : const Color(0xFFFFABB8)),
             ),
             onPressed: () {
               int newTabIdx = tabIdx;

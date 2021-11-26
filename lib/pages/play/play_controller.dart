@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:misty_master/model/vod_entity.dart';
 import 'package:misty_master/service/http.dart';
+import 'package:misty_master/constants/constants.dart';
 
 import 'play_state.dart';
 
@@ -50,13 +51,11 @@ class PlayController extends GetxController with SingleGetTickerProviderMixin {
 
     String nextVideoUrl =
         state.playerVodTabs.value.video![tabIdx]!.list![activeIdx]!.url!;
-
     String? fq = state.playerVodTabs.value.video![state.curTabIdx.value]!
         .list![state.curActiveIdx.value]!.fq;
     if (nextVideoUrl == 'fq') {
       nextVideoUrl = await getFqVideosPlayerListByFq(fq);
     }
-
     if (player.value.state == FijkState.completed) {
       await player.stop();
     }
@@ -64,8 +63,6 @@ class PlayController extends GetxController with SingleGetTickerProviderMixin {
       player.setDataSource(nextVideoUrl, autoPlay: true);
     });
   }
-
-
 
   @override
   void onReady() async {
@@ -89,6 +86,11 @@ class PlayController extends GetxController with SingleGetTickerProviderMixin {
     }
     await player.reset().then((_) async {
       player.setDataSource(nextVideoUrl, autoPlay: true);
+    });
+    player.addListener(() {
+      if (player.state == FijkState.started) {
+        "视频加载成功".toast();
+      }
     });
     super.onReady();
   }

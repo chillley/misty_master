@@ -16,6 +16,7 @@ class VideoSourceFormatVideoList {
   VideoSourceFormatVideoList({
     this.url,
     this.name,
+    this.fq,
   });
   VideoSourceFormatVideoList.fromJson(Map<String, dynamic> json) {
     url = json["url"]?.toString();
