@@ -5,6 +5,7 @@ import 'dart:ui';
 
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
+import 'package:misty_master/constants/constants.dart';
 import 'package:wakelock/wakelock.dart';
 
 import './schema.dart' show VideoSourceFormat;
@@ -373,8 +374,8 @@ class _CustomFijkPanelState extends State<CustomFijkPanel>
               elevation: MaterialStateProperty.all(0),
               backgroundColor: MaterialStateProperty.all(
                   tabIdx == widget.curTabIdx && activeIdx == widget.curActiveIdx
-                      ? Colors.red
-                      : Colors.blue),
+                      ? Constants.defaultColor
+                      : Constants.defaultLightColor),
             ),
             onPressed: () {
               int newTabIdx = tabIdx;

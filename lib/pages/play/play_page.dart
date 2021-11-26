@@ -145,9 +145,9 @@ class PlayPage extends StatelessWidget {
                 playerTitle: isNullText(state.vod.value.vodName),
                 showConfig: vCfg,
                 videoFormat: state.playerVodTabs.value,
-                onChangeVideo: controller.onChangeVideo,
+                onChangeVideo: controller.changePlayTheSource,
                 curTabIdx: state.curTabIdx.value,
-                curActiveIdx: state.curTabIdx.value,
+                curActiveIdx: state.curActiveIdx.value,
               )));
         },
       );

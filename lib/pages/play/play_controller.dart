@@ -65,10 +65,7 @@ class PlayController extends GetxController with SingleGetTickerProviderMixin {
     });
   }
 
-  onChangeVideo(int curTabIdx, int curActiveIdx) {
-    state.curTabIdx.value = curTabIdx;
-    state.curActiveIdx.value = curActiveIdx;
-  }
+
 
   @override
   void onReady() async {
