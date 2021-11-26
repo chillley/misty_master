@@ -90,6 +90,7 @@ class PlayController extends GetxController with SingleGetTickerProviderMixin {
     await player.reset().then((_) async {
       player.setDataSource(nextVideoUrl, autoPlay: true);
     });
+
     super.onReady();
   }
 
