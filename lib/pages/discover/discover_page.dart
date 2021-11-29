@@ -19,8 +19,7 @@ class DiscoverPage extends StatelessWidget {
     final state = Get.find<DiscoverController>().state;
 
     Widget _typeRow() {
-      List<Type_entity> typeList = [Type_entity(typeId: 0, typeName: "全部")];
-      typeList.addAll(mainController.state.tabList);
+      List<Type_entity> typeList = mainController.state.tabList;
       return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
@@ -36,8 +35,23 @@ class DiscoverPage extends StatelessWidget {
       );
     }
 
+    Widget _type2Row() {
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Obx(() => Row(
+              children: state.type2List.value.map((type) {
+                return MistyTypeButton(
+                  color: Constants.defaultColor,
+                  borRadiusNum: 5,
+                  text: isNullText(type.typeName),
+                  isActive: type.typeId == state.type2SelectIndex.value,
+                );
+              }).toList(),
+            )),
+      );
+    }
 
-    Widget _areaRow(){
+    Widget _areaRow() {
       List areaList = [];
       return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -61,6 +75,10 @@ class DiscoverPage extends StatelessWidget {
             height: 10,
           ),
           _typeRow(),
+          const SizedBox(
+            height: 10,
+          ),
+          _type2Row(),
           const SizedBox(
             height: 10,
           ),

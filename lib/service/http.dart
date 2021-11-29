@@ -25,5 +25,8 @@ class Http {
   static getFqVideosPlayerListByFq(data) {
     return HttpUtils.post(Api.getFqVideosPlayerListByFq, data: data);
   }
+  static getLevel2TypeList(data) {
+    return HttpUtils.post(Api.getLevel2TypeList, data: data);
+  }
 
 }
