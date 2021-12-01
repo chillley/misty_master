@@ -25,10 +25,12 @@ class DiscoverPage extends StatelessWidget {
         child: Row(
           children: typeList.map((type) {
             return MistyTypeButton(
+              id: type.typeId!,
               color: Constants.defaultColor,
               borRadiusNum: 5,
               text: isNullText(type.typeName),
               isActive: type.typeId == state.type1SelectIndex.value,
+              onTap: controller.onChangeType1SelectIndex,
             );
           }).toList(),
         ),
@@ -41,6 +43,7 @@ class DiscoverPage extends StatelessWidget {
         child: Obx(() => Row(
               children: state.type2List.value.map((type) {
                 return MistyTypeButton(
+                  id: type.typeId!,
                   color: Constants.defaultColor,
                   borRadiusNum: 5,
                   text: isNullText(type.typeName),
@@ -58,6 +61,7 @@ class DiscoverPage extends StatelessWidget {
         child: Row(
           children: areaList.map((type) {
             return MistyTypeButton(
+              id: type.typeId!,
               color: Constants.defaultColor,
               borRadiusNum: 5,
               text: isNullText(type.typeName),
@@ -69,21 +73,24 @@ class DiscoverPage extends StatelessWidget {
     }
 
     Widget _filtrateContent() {
-      return Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          _typeRow(),
-          const SizedBox(
-            height: 10,
-          ),
-          _type2Row(),
-          const SizedBox(
-            height: 10,
-          ),
-          _areaRow(),
-        ],
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            _typeRow(),
+            const SizedBox(
+              height: 10,
+            ),
+            _type2Row(),
+            const SizedBox(
+              height: 10,
+            ),
+            _areaRow(),
+          ],
+        ),
       );
     }
 

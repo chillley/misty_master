@@ -5,11 +5,13 @@ class MistyTypeButton extends StatelessWidget {
   final Color color;
   final bool isActive;
   final int borRadiusNum;
+  final int id;
   final Function? onTap;
 
   const MistyTypeButton({
     Key? key,
     required this.text,
+    required this.id,
     required this.color,
     required this.isActive,
     required this.borRadiusNum,
@@ -36,7 +38,7 @@ class MistyTypeButton extends StatelessWidget {
         ),
         onTap: () {
           if (onTap != null) {
-            onTap!();
+            onTap!(id);
           }
         },
       ),
