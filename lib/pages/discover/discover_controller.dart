@@ -12,7 +12,7 @@ class DiscoverController extends GetxController {
   final DiscoverState state = DiscoverState();
   final mainController = Get.find<MainController>();
 
-  ScrollController gridScrollController = ScrollController();
+  ScrollController singleScrollController = ScrollController();
 
   late Map typeExtend;
 
@@ -40,22 +40,24 @@ class DiscoverController extends GetxController {
       params['type'] = state.type2SelectId.value;
     }
     params['type1'] = state.type1SelectId.value;
-    params['limit'] = 20;
+    params['limit'] = 24;
     params['page'] = state.vodListPageIndex;
     Map<String, dynamic> mapRes = await Http.getTypeData(params);
     if (mapRes['success'] == 1) {
-      Map data = mapRes['data'];
+      Map<String, dynamic> data = mapRes['data'];
       state.vodListCount = data['count'];
-      List<Map<String, dynamic>> rows = data['rows'];
+      List rows = data['rows'];
       if (state.vodList.length < state.vodListCount) {
-        state.vodList.value
-            .addAll(rows.map((row) => Vod_entity.fromJson(row)).toList());
+        List<Vod_entity> vodList =
+            rows.map((row) => Vod_entity.fromJson(row)).toList();
+        state.vodList.addAll(vodList);
       } else {
         state.vodListFinished = true;
         if (state.vodListCount == 0) {
-          state.vodList.value = [];
+          state.vodList = [];
         }
       }
+      update(['grid-list']);
     }
   }
 
@@ -72,26 +74,37 @@ class DiscoverController extends GetxController {
     await getLevel2TypeList(id);
     resetAllFilter();
     setFilterData(state.type1SelectId.value);
+    await getTypeData();
   }
 
-  onChangeType2SelectId(id) {
+  onChangeType2SelectId(id) async {
     state.type2SelectId.value = id;
+    state.vodList = [];
+    await getTypeData();
   }
 
-  onChangeClass(String classSelected) {
+  onChangeClass(String classSelected) async {
     state.classSelected.value = classSelected;
+    state.vodList = [];
+    await getTypeData();
   }
 
-  onChangeArea(area) {
+  onChangeArea(area) async {
     state.areaSelected.value = area;
+    state.vodList = [];
+    await getTypeData();
   }
 
-  onChangeYear(year) {
+  onChangeYear(year) async {
     state.yearSelected.value = year;
+    state.vodList = [];
+    await getTypeData();
   }
 
-  onChangeLanguage(language) {
+  onChangeLanguage(language) async {
     state.languageSelected.value = language;
+    state.vodList = [];
+    await getTypeData();
   }
 
   setFilterData(int id) {
@@ -130,9 +143,9 @@ class DiscoverController extends GetxController {
 
     await getTypeData();
 
-    gridScrollController.addListener(() async {
-      if (gridScrollController.position.pixels ==
-          gridScrollController.position.maxScrollExtent) {
+    singleScrollController.addListener(() async {
+      if (singleScrollController.position.pixels ==
+          singleScrollController.position.maxScrollExtent) {
         state.vodListPageIndex++;
         await getTypeData();
       }

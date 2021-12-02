@@ -183,115 +183,137 @@ class DiscoverPage extends StatelessWidget {
     }
 
     Widget _vodContent() {
-      return Expanded(
-        child: Obx(
-          () => GridView.builder(
-              controller: controller.gridScrollController,
-              itemCount: state.vodList.value.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 5,
-                crossAxisSpacing: 5,
-              ),
-              itemBuilder: (_, int index) {
-                Vod_entity vod = state.vodList.value[index];
-                return Column(
-                  children: [
-                    Container(
-                      height: 200,
-                      width: 100,
-                      color: Colors.blueAccent,
-                      child: Stack(
-                        children: [
-                          ClipRRect(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(6.0)),
-                            child: ExtendedImage.network(
-                              isNullText(vod.vodPic),
-                              width: 110,
-                              height: 160,
-                              cache: true,
-                              fit: BoxFit.cover,
-                              loadStateChanged: (ExtendedImageState state) {
-                                if (state.extendedImageLoadState ==
-                                    LoadState.failed) {
-                                  return Image.asset("assets/images/no.png",
-                                      fit: BoxFit.none);
-                                }
-                                if (state.extendedImageLoadState ==
-                                    LoadState.loading) {
-                                  return Image.asset("assets/images/load.gif",
-                                      fit: BoxFit.cover);
-                                }
-                              },
-                            ),
+      double gridWidth = (Constants.screenWidth / 3) - 25;
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        child: GetBuilder<DiscoverController>(
+          id: 'grid-list',
+          builder: (controller) {
+            return GridView.builder(
+                shrinkWrap: true,
+                itemCount: state.vodList.length,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 1,
+                    crossAxisSpacing: 4,
+                    childAspectRatio: 1 / 2,
+                    crossAxisCount: 3),
+                itemBuilder: (_, int index) {
+                  Vod_entity vod = state.vodList[index];
+                  return InkWell(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: gridWidth,
+                          height: (2 * gridWidth) - 50,
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(3.0)),
+                                child: ExtendedImage.network(
+                                  isNullText(vod.vodPic),
+                                  width: gridWidth,
+                                  height: (2 * gridWidth) - 50,
+                                  cache: true,
+                                  fit: BoxFit.cover,
+                                  loadStateChanged: (ExtendedImageState state) {
+                                    if (state.extendedImageLoadState ==
+                                        LoadState.failed) {
+                                      return Image.asset("assets/images/no.png",
+                                          fit: BoxFit.none);
+                                    }
+                                    if (state.extendedImageLoadState ==
+                                        LoadState.loading) {
+                                      return Image.asset(
+                                          "assets/images/load.gif",
+                                          fit: BoxFit.cover);
+                                    }
+                                  },
+                                ),
+                              ),
+                              Positioned(
+                                top: 5,
+                                left: 3,
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(3.0)),
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 3),
+                                        color: Colors.blueAccent,
+                                        child: Text(
+                                          isNullText(vod.vodYear),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(3.0)),
+                                      child: Container(
+                                        color: Colors.amber,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 3),
+                                        child: Text(
+                                          isNullText(vod.vodArea),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
-                          Positioned(
-                            top: 5,
-                            left: 3,
-                            child: Row(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(3.0)),
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 3),
-                                    color: Colors.blueAccent,
-                                    child: Text(
-                                      isNullText(vod.vodYear),
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 5),
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(3.0)),
-                                  child: Container(
-                                    color: Colors.amber,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 3),
-                                    child: Text(
-                                      isNullText(vod.vodArea),
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                isNullText(vod.vodName),
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                    fontSize: 15, color: Colors.black),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                isNullText(vod.vodContent),
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                    fontSize: 12, color: Colors.black87),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    Text(
-                      isNullText(vod.vodName),
-                      style: const TextStyle(fontSize: 15, color: Colors.black),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    Text(
-                      isNullText(vod.vodContent),
-                      style:
-                          const TextStyle(fontSize: 12, color: Colors.black26),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    )
-                  ],
-                );
-              }),
+                    onTap: () {
+                      Get.toNamed(RouteConfig.play, arguments: vod.vodId);
+                    },
+                  );
+                });
+          },
         ),
       );
     }
@@ -319,8 +341,12 @@ class DiscoverPage extends StatelessWidget {
       ),
       body: Container(
         color: Colors.white,
-        child: Column(
-          children: [_filtrateContent(), _vodContent()],
+        child: SingleChildScrollView(
+          controller: controller.singleScrollController,
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [_filtrateContent(), _vodContent()],
+          ),
         ),
       ),
     );

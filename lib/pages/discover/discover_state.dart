@@ -7,8 +7,8 @@ class DiscoverState {
   Rx<int> type2SelectId = Rx<int>(0);
 
   RxList<Type_entity> type2List = RxList<Type_entity>([]);
-
-  RxList<Vod_entity> vodList = RxList<Vod_entity>([]);
+  /// 视频列表list
+  late List<Vod_entity> vodList;
 
   Rx<String> classSelected = Rx<String>("全部");
   Rx<String> areaSelected = Rx<String>("全部");
@@ -35,6 +35,7 @@ class DiscoverState {
 
     vodListFinished = false;
 
+    vodList = [];
     ///Initialize variables
   }
 }
