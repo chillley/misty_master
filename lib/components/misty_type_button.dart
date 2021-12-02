@@ -5,13 +5,11 @@ class MistyTypeButton extends StatelessWidget {
   final Color color;
   final bool isActive;
   final int borRadiusNum;
-  final int id;
   final Function? onTap;
 
   const MistyTypeButton({
     Key? key,
     required this.text,
-    required this.id,
     required this.color,
     required this.isActive,
     required this.borRadiusNum,
@@ -20,28 +18,25 @@ class MistyTypeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: InkWell(
-        child: Container(
-          decoration: BoxDecoration(
-            color: isActive ? color : Colors.transparent,
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-          ),
-          child: Padding(
-            padding:
-                const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
-            child: Text(
-              text,
-              style: TextStyle(color: isActive ? Colors.white : Colors.black),
-            ),
+    return InkWell(
+      child: Container(
+        decoration: BoxDecoration(
+          color: isActive ? color : Colors.transparent,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+          child: Text(
+            text,
+            style: TextStyle(color: isActive ? Colors.white : Colors.black),
           ),
         ),
-        onTap: () {
-          if (onTap != null) {
-            onTap!(id);
-          }
-        },
       ),
+      onTap: () {
+        if (onTap != null) {
+          onTap!();
+        }
+      },
     );
   }
 }

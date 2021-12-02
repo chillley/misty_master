@@ -1,7 +1,10 @@
+import 'package:common_utils/common_utils.dart';
 import 'package:get/get.dart';
 import 'package:misty_master/model/type_entity.dart';
+import 'package:misty_master/model/vod_entity.dart';
 import 'package:misty_master/pages/main/main_controller.dart';
 import 'package:misty_master/service/http.dart';
+import 'package:flutter/material.dart';
 
 import 'discover_state.dart';
 
@@ -9,28 +12,131 @@ class DiscoverController extends GetxController {
   final DiscoverState state = DiscoverState();
   final mainController = Get.find<MainController>();
 
+  ScrollController gridScrollController = ScrollController();
+
+  late Map typeExtend;
+
   Future getLevel2TypeList(id) async {
     Map params = {'id': id};
     Map<String, dynamic> mapRes = await Http.getLevel2TypeList(params);
-    List<Type_entity> data = mapRes['data'];
+    List data = mapRes['data'];
     List<Type_entity> type2List =
         data.map((row) => Type_entity.fromJson(row)).toList();
     type2List.insert(0, Type_entity(typeId: 0, typeName: '全部'));
     state.type2List.value = type2List;
-    print(mainController.state.tabList[0].typeId);
   }
 
-  resetOtherTypeSelectIndex() {}
+  Future getTypeData() async {
+    Map params = {
+      'area': state.areaSelected.value == '全部' ? '' : state.areaSelected.value,
+      'classTag':
+          state.classSelected.value == '全部' ? '' : state.classSelected.value,
+      'lang': state.languageSelected.value == '全部'
+          ? ''
+          : state.languageSelected.value,
+      'year': state.yearSelected.value == '全部' ? '' : state.yearSelected.value,
+    };
+    if (state.type2SelectId.value != 0) {
+      params['type'] = state.type2SelectId.value;
+    }
+    params['type1'] = state.type1SelectId.value;
+    params['limit'] = 20;
+    params['page'] = state.vodListPageIndex;
+    Map<String, dynamic> mapRes = await Http.getTypeData(params);
+    if (mapRes['success'] == 1) {
+      Map data = mapRes['data'];
+      state.vodListCount = data['count'];
+      List<Map<String, dynamic>> rows = data['rows'];
+      if (state.vodList.length < state.vodListCount) {
+        state.vodList.value
+            .addAll(rows.map((row) => Vod_entity.fromJson(row)).toList());
+      } else {
+        state.vodListFinished = true;
+        if (state.vodListCount == 0) {
+          state.vodList.value = [];
+        }
+      }
+    }
+  }
 
-  onChangeType1SelectIndex(int id) async {
-    state.type1SelectIndex.value = id;
+  resetAllFilter() {
+    state.type2SelectId.value = 0;
+    state.classSelected.value = '全部';
+    state.areaSelected.value = '全部';
+    state.yearSelected.value = '全部';
+    state.languageSelected.value = '全部';
+  }
+
+  onChangeType1SelectId(int id) async {
+    state.type1SelectId.value = id;
     await getLevel2TypeList(id);
+    resetAllFilter();
+    setFilterData(state.type1SelectId.value);
+  }
+
+  onChangeType2SelectId(id) {
+    state.type2SelectId.value = id;
+  }
+
+  onChangeClass(String classSelected) {
+    state.classSelected.value = classSelected;
+  }
+
+  onChangeArea(area) {
+    state.areaSelected.value = area;
+  }
+
+  onChangeYear(year) {
+    state.yearSelected.value = year;
+  }
+
+  onChangeLanguage(language) {
+    state.languageSelected.value = language;
+  }
+
+  setFilterData(int id) {
+    Type_entity selectedTab = mainController.state.tabList.firstWhere((tab) {
+      return tab.typeId == id;
+    }, orElse: () {
+      return mainController.state.tabList[0];
+    });
+
+    Map typeExtend = JsonUtil.getObj(selectedTab.typeExtend, (v) => v)!;
+
+    List<String> classList = typeExtend['class']!.split(',');
+    classList.insert(0, '全部');
+    state.classList.value = classList;
+
+    List<String> areaList = typeExtend['area']!.split(',');
+    areaList.insert(0, '全部');
+    state.areaList.value = areaList;
+
+    List<String> yearList = typeExtend['year']!.split(',');
+    yearList.insert(0, '全部');
+    state.yearList.value = yearList;
+
+    List<String> languageList = typeExtend['lang']!.split(',');
+    languageList.insert(0, '全部');
+    state.languageList.value = languageList;
   }
 
   @override
   void onReady() async {
-    // TODO: implement onReady
-    await getLevel2TypeList(mainController.state.tabList[0].typeId);
+    Type_entity selectedTab = mainController.state.tabList[0];
+
+    await getLevel2TypeList(selectedTab.typeId);
+
+    setFilterData(selectedTab.typeId!);
+
+    await getTypeData();
+
+    gridScrollController.addListener(() async {
+      if (gridScrollController.position.pixels ==
+          gridScrollController.position.maxScrollExtent) {
+        state.vodListPageIndex++;
+        await getTypeData();
+      }
+    });
     super.onReady();
   }
 

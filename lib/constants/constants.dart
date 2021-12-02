@@ -4,7 +4,6 @@ export 'extension.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
-
   static const Color splashPageBgc = Color(0xF21C2F54);
 
   // 主题颜色
@@ -12,6 +11,5 @@ class Constants {
 
   // 浅色主题颜色
   static const Color defaultLightColor = Color(0xFFFFABB8);
-
 
 }

@@ -11,9 +11,13 @@ class Api {
 
   static const String getVodDetails = '/api/getVodDetails';
 
-  static const String getVodPlayVideoSourceFormat = '/api/getVodPlayVideoSourceFormat';
+  static const String getVodPlayVideoSourceFormat =
+      '/api/getVodPlayVideoSourceFormat';
 
-  static const String getFqVideosPlayerListByFq = '/api/getFqVideosPlayerListByFq';
+  static const String getFqVideosPlayerListByFq =
+      '/api/getFqVideosPlayerListByFq';
 
   static const String getLevel2TypeList = '/api/getLevel2TypeList';
+
+  static const String getTypeData = '/api/getTypeData';
 }

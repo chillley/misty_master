@@ -6,6 +6,10 @@ class Http {
     return HttpUtils.post(Api.getVodList, data: data);
   }
 
+  static getTypeData(data) {
+    return HttpUtils.post(Api.getTypeData, data: data);
+  }
+
   static getLevel1TypeList() {
     return HttpUtils.post(Api.getLevel1TypeList);
   }

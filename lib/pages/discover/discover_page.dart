@@ -1,8 +1,10 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:misty_master/components/misty_type_button.dart';
 import 'package:misty_master/constants/constants.dart';
 import 'package:misty_master/model/type_entity.dart';
+import 'package:misty_master/model/vod_entity.dart';
 import 'package:misty_master/pages/main/main_controller.dart';
 import 'package:misty_master/routes/route_config.dart';
 import 'package:misty_master/utils/tools_utils.dart';
@@ -22,17 +24,20 @@ class DiscoverPage extends StatelessWidget {
       List<Type_entity> typeList = mainController.state.tabList;
       return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Row(
-          children: typeList.map((type) {
-            return MistyTypeButton(
-              id: type.typeId!,
-              color: Constants.defaultColor,
-              borRadiusNum: 5,
-              text: isNullText(type.typeName),
-              isActive: type.typeId == state.type1SelectIndex.value,
-              onTap: controller.onChangeType1SelectIndex,
-            );
-          }).toList(),
+        child: Obx(
+          () => Row(
+            children: typeList.map((type) {
+              return MistyTypeButton(
+                color: Constants.defaultColor,
+                borRadiusNum: 5,
+                text: isNullText(type.typeName),
+                isActive: type.typeId == state.type1SelectId.value,
+                onTap: () {
+                  controller.onChangeType1SelectId(type.typeId!);
+                },
+              );
+            }).toList(),
+          ),
         ),
       );
     }
@@ -41,55 +46,252 @@ class DiscoverPage extends StatelessWidget {
       return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Obx(() => Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: state.type2List.value.map((type) {
                 return MistyTypeButton(
-                  id: type.typeId!,
                   color: Constants.defaultColor,
                   borRadiusNum: 5,
                   text: isNullText(type.typeName),
-                  isActive: type.typeId == state.type2SelectIndex.value,
+                  isActive: type.typeId == state.type2SelectId.value,
+                  onTap: () {
+                    controller.onChangeType2SelectId(type.typeId!);
+                  },
                 );
               }).toList(),
             )),
       );
     }
 
-    Widget _areaRow() {
-      List areaList = [];
+    Widget _classRow() {
       return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Row(
-          children: areaList.map((type) {
-            return MistyTypeButton(
-              id: type.typeId!,
-              color: Constants.defaultColor,
-              borRadiusNum: 5,
-              text: isNullText(type.typeName),
-              isActive: type.typeId == state.type1SelectIndex.value,
-            );
-          }).toList(),
+        child: Obx(
+          () => Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: state.classList.map((classStr) {
+              return MistyTypeButton(
+                color: Constants.defaultColor,
+                borRadiusNum: 5,
+                text: isNullText(classStr),
+                isActive: classStr == state.classSelected.value,
+                onTap: () {
+                  controller.onChangeClass(classStr);
+                },
+              );
+            }).toList(),
+          ),
+        ),
+      );
+    }
+
+    Widget _areaRow() {
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Obx(
+          () => Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: state.areaList.map((area) {
+              return MistyTypeButton(
+                color: Constants.defaultColor,
+                borRadiusNum: 5,
+                text: isNullText(area),
+                isActive: area == state.areaSelected.value,
+                onTap: () {
+                  controller.onChangeArea(area);
+                },
+              );
+            }).toList(),
+          ),
+        ),
+      );
+    }
+
+    Widget _yearRow() {
+      return Obx(
+        () => SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: state.yearList.map((year) {
+              return MistyTypeButton(
+                color: Constants.defaultColor,
+                borRadiusNum: 5,
+                text: isNullText(year),
+                isActive: year == state.yearSelected.value,
+                onTap: () {
+                  controller.onChangeYear(year);
+                },
+              );
+            }).toList(),
+          ),
+        ),
+      );
+    }
+
+    Widget _languageRow() {
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Obx(
+          () => Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: state.languageList.map((language) {
+              return MistyTypeButton(
+                color: Constants.defaultColor,
+                borRadiusNum: 5,
+                text: isNullText(language),
+                isActive: language == state.languageSelected.value,
+                onTap: () {
+                  controller.onChangeLanguage(language);
+                },
+              );
+            }).toList(),
+          ),
         ),
       );
     }
 
     Widget _filtrateContent() {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 10,
-            ),
             _typeRow(),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
             _type2Row(),
             const SizedBox(
-              height: 10,
+              height: 15,
+            ),
+            _classRow(),
+            const SizedBox(
+              height: 15,
             ),
             _areaRow(),
+            const SizedBox(
+              height: 15,
+            ),
+            _yearRow(),
+            const SizedBox(
+              height: 15,
+            ),
+            _languageRow(),
           ],
+        ),
+      );
+    }
+
+    Widget _vodContent() {
+      return Expanded(
+        child: Obx(
+          () => GridView.builder(
+              controller: controller.gridScrollController,
+              itemCount: state.vodList.value.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 5,
+                crossAxisSpacing: 5,
+              ),
+              itemBuilder: (_, int index) {
+                Vod_entity vod = state.vodList.value[index];
+                return Column(
+                  children: [
+                    Container(
+                      height: 200,
+                      width: 100,
+                      color: Colors.blueAccent,
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(6.0)),
+                            child: ExtendedImage.network(
+                              isNullText(vod.vodPic),
+                              width: 110,
+                              height: 160,
+                              cache: true,
+                              fit: BoxFit.cover,
+                              loadStateChanged: (ExtendedImageState state) {
+                                if (state.extendedImageLoadState ==
+                                    LoadState.failed) {
+                                  return Image.asset("assets/images/no.png",
+                                      fit: BoxFit.none);
+                                }
+                                if (state.extendedImageLoadState ==
+                                    LoadState.loading) {
+                                  return Image.asset("assets/images/load.gif",
+                                      fit: BoxFit.cover);
+                                }
+                              },
+                            ),
+                          ),
+                          Positioned(
+                            top: 5,
+                            left: 3,
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(3.0)),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 3),
+                                    color: Colors.blueAccent,
+                                    child: Text(
+                                      isNullText(vod.vodYear),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(3.0)),
+                                  child: Container(
+                                    color: Colors.amber,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 3),
+                                    child: Text(
+                                      isNullText(vod.vodArea),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Text(
+                      isNullText(vod.vodName),
+                      style: const TextStyle(fontSize: 15, color: Colors.black),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Text(
+                      isNullText(vod.vodContent),
+                      style:
+                          const TextStyle(fontSize: 12, color: Colors.black26),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  ],
+                );
+              }),
         ),
       );
     }
@@ -98,6 +300,7 @@ class DiscoverPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
+        elevation: 0,
         titleTextStyle: const TextStyle(
           color: Colors.black,
           fontSize: 20.0,
@@ -114,9 +317,10 @@ class DiscoverPage extends StatelessWidget {
           )
         ],
       ),
-      body: SingleChildScrollView(
+      body: Container(
+        color: Colors.white,
         child: Column(
-          children: [_filtrateContent()],
+          children: [_filtrateContent(), _vodContent()],
         ),
       ),
     );
