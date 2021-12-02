@@ -195,7 +195,7 @@ class DiscoverPage extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisSpacing: 0,
-                    crossAxisSpacing: 5,
+                    crossAxisSpacing: 3,
                     childAspectRatio: 1 / 2,
                     crossAxisCount: 3),
                 itemBuilder: (_, int index) {
