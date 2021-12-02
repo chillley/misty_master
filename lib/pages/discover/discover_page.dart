@@ -183,9 +183,9 @@ class DiscoverPage extends StatelessWidget {
     }
 
     Widget _vodContent() {
-      double gridWidth = (Constants.screenWidth / 3) - 25;
+      double gridWidth = (Constants.screenWidth / 3) - 15;
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
         child: GetBuilder<DiscoverController>(
           id: 'grid-list',
           builder: (controller) {
@@ -194,8 +194,8 @@ class DiscoverPage extends StatelessWidget {
                 itemCount: state.vodList.length,
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 1,
-                    crossAxisSpacing: 4,
+                    mainAxisSpacing: 0,
+                    crossAxisSpacing: 5,
                     childAspectRatio: 1 / 2,
                     crossAxisCount: 3),
                 itemBuilder: (_, int index) {
