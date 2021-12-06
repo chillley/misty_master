@@ -319,7 +319,12 @@ class DiscoverPage extends StatelessWidget {
                         },
                       );
                     })
-                : const Text('暂无符合条件的数据');
+                : const Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                    child: Center(
+                      child: Text('暂无符合条件的数据'),
+                    ));
           },
         ),
       );
