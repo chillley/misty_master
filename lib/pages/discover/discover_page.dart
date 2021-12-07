@@ -189,7 +189,7 @@ class DiscoverPage extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
         child: GetBuilder<DiscoverController>(
-          id: 'grid-list',
+          id: 'discover-list',
           builder: (controller) {
             return state.vodList.isNotEmpty
                 ? GridView.builder(

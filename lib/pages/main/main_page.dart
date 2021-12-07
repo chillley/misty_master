@@ -16,7 +16,7 @@ class MainPage extends StatelessWidget {
 
     Widget _listItem() {
       return GetBuilder<MainController>(
-          id: 'item-list',
+          id: 'main-list',
           builder: (controller) {
             return Container(
               color: Colors.white,
@@ -36,6 +36,7 @@ class MainPage extends StatelessWidget {
 
     AppBar _appBar() {
       return AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         titleTextStyle: const TextStyle(

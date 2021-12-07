@@ -38,7 +38,7 @@ class MainController extends GetxController with SingleGetTickerProviderMixin {
           state.vodList = [];
         }
       }
-      update(['item-list']);
+      update(['main-list']);
     }
   }
 

@@ -57,7 +57,7 @@ class DiscoverController extends GetxController {
           state.vodList = [];
         }
       }
-      update(['grid-list']);
+      update(['discover-list']);
     }
   }
 
@@ -74,36 +74,42 @@ class DiscoverController extends GetxController {
     await getLevel2TypeList(id);
     resetAllFilter();
     setFilterData(state.type1SelectId.value);
+    state.vodListPageIndex = 1;
     await getTypeData();
   }
 
   onChangeType2SelectId(id) async {
     state.type2SelectId.value = id;
     state.vodList = [];
+    state.vodListPageIndex = 1;
     await getTypeData();
   }
 
   onChangeClass(String classSelected) async {
     state.classSelected.value = classSelected;
     state.vodList = [];
+    state.vodListPageIndex = 1;
     await getTypeData();
   }
 
   onChangeArea(area) async {
     state.areaSelected.value = area;
     state.vodList = [];
+    state.vodListPageIndex = 1;
     await getTypeData();
   }
 
   onChangeYear(year) async {
     state.yearSelected.value = year;
     state.vodList = [];
+    state.vodListPageIndex = 1;
     await getTypeData();
   }
 
   onChangeLanguage(language) async {
     state.languageSelected.value = language;
     state.vodList = [];
+    state.vodListPageIndex = 1;
     await getTypeData();
   }
 

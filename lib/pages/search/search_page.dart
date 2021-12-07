@@ -17,7 +17,7 @@ class SearchPage extends StatelessWidget {
 
     Widget _listItem() {
       return GetBuilder<SearchController>(
-          id: 'search-item-list',
+          id: 'search-list',
           builder: (controller) {
             return Container(
               color: Colors.white,

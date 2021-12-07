@@ -35,14 +35,14 @@ class SearchController extends GetxController {
           state.vodList = [];
         }
       }
-      update(['search-item-list']);
+      update(['search-list']);
     }
   }
 
   Future resetVodList() async {
     state.vodList = [];
     state.vodListFinished = false;
-    update(['search-item-list']);
+    update(['search-list']);
   }
 
   Future loadMoreVodList() async {
