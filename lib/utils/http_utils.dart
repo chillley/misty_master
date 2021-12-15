@@ -1,15 +1,5 @@
-// import 'dart:io';
-
-import 'dart:io';
-
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:cookie_jar/cookie_jar.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-// import 'package:flutter/foundation.dart';
-
-// import 'package:path_provider/path_provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:misty_master/constants/constants.dart';
 
@@ -57,15 +47,6 @@ class HttpUtils {
 
   // 初始化 dio 方法
   static Future<void> init() async {
-    // String tempPath = './cookie';
-
-    // 获取临时路径  [获取临时路径报错,目前暂时禁用当前这段代码]
-    // if (!kIsWeb) {
-    //   Directory tempDir = await getTemporaryDirectory();
-    //   tempPath = tempDir.path;
-    // }
-    // 添加cookie进入临时路径保存
-    // var cookieJar = PersistCookieJar(storage: FileStorage(tempPath));
     _dio = Dio(
       BaseOptions(
           baseUrl: baseUrl,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:misty_master/components/misty_gradient_button.dart';
+import 'package:misty_master/constants/constants.dart';
 import 'package:misty_master/routes/route_config.dart';
 
 import 'mine_controller.dart';
@@ -15,8 +18,56 @@ class MinePage extends StatelessWidget {
     _topContent() {
       return Container(
         color: Colors.white,
-        height: 100,
-        child: Row(),
+        height: 140,
+        alignment: Alignment.center,
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(50.0)),
+          child: Image.asset(
+            "assets/images/header.png",
+            height: 100,
+            width: 100,
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    }
+
+    Widget _buildItem(BuildContext context, IconData icon, String title,
+            {VoidCallback? onTap}) =>
+        ListTile(
+          leading: Icon(
+            icon,
+            color: Constants.defaultColor,
+          ),
+          title: Text(title),
+          trailing:
+              const Icon(Icons.chevron_right, color: Constants.defaultColor),
+          onTap: () {
+            return "暂未实现".toast();
+          },
+        );
+
+    _listContent() {
+      return Container(
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 10,
+            ),
+            _buildItem(context, Icons.settings, '应用设置'),
+            _buildItem(context, Icons.construction, '数据管理'),
+            _buildItem(context, Icons.collections, '我的收藏'),
+            const Divider(
+              height: 1,
+            ),
+            _buildItem(context, Icons.update, '版本信息'),
+            _buildItem(context, Icons.info, '关于应用'),
+            const Divider(
+              height: 1,
+            ),
+          ],
+        ),
       );
     }
 
@@ -42,8 +93,29 @@ class MinePage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Column(
-          children: [_topContent()],
+          children: [
+            _topContent(),
+            _listContent(),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
+              height: 48,
+              child: SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: GradientButton(
+                  onPressed: () {
+                    SystemNavigator.pop();
+                  },
+                  child: const Text('退出'),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

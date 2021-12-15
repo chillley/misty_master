@@ -4,7 +4,7 @@ class MistyTypeButton extends StatelessWidget {
   final String text;
   final Color color;
   final bool isActive;
-  final int borRadiusNum;
+  final double borRadiusNum;
   final Function? onTap;
 
   const MistyTypeButton({
@@ -22,7 +22,7 @@ class MistyTypeButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isActive ? color : Colors.transparent,
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          borderRadius: BorderRadius.all(Radius.circular(borRadiusNum)),
         ),
         child: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
