@@ -41,7 +41,7 @@ class HttpInterceptor extends Interceptor {
 
 class HttpUtils {
   // 请求BaseUrl
-  static const String baseUrl = 'http://111.229.255.133:7001';
+  static const String baseUrl = 'you service';
 
   static late final Dio _dio;
 
