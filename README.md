@@ -6,13 +6,13 @@
 
 ### 预览
 <p align="center">
-<img src="https://github.com/chillley/images/blob/main/misty/app1.jpg?raw=true" width="140">
-<img src="https://github.com/chillley/images/blob/main/misty/app2.jpg?raw=true" width="140">
-<img src="https://github.com/chillley/images/blob/main/misty/app3.jpg?raw=true" width="140">
-<img src="https://github.com/chillley/images/blob/main/misty/app4.jpg?raw=true" width="140">
-<img src="https://github.com/chillley/images/blob/main/misty/app5.jpg?raw=true" width="140">
-<img src="https://github.com/chillley/images/blob/main/misty/app6.jpg?raw=true" width="140">
-<img src="https://github.com/chillley/images/blob/main/misty/app7.jpg?raw=true" width="140">
+<img src="https://github.com/chillley/images/blob/main/misty/app1.jpg?raw=true" width="300">
+<img src="https://github.com/chillley/images/blob/main/misty/app2.jpg?raw=true" width="300">
+<img src="https://github.com/chillley/images/blob/main/misty/app3.jpg?raw=true" width="300">
+<img src="https://github.com/chillley/images/blob/main/misty/app4.jpg?raw=true" width="300">
+<img src="https://github.com/chillley/images/blob/main/misty/app5.jpg?raw=true" width="300">
+<img src="https://github.com/chillley/images/blob/main/misty/app6.jpg?raw=true" width="300">
+<img src="https://github.com/chillley/images/blob/main/misty/app7.jpg?raw=true" width="300">
 </p>
 
 ### 项目结构
