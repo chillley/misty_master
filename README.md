@@ -5,13 +5,13 @@
 - [egg-cms](https://github.com/chillley/egg-cms)
 
 ### 预览
-![image](https://github.com/chillley/images/blob/main/misty/app1.jpg?raw=true)
-![image](https://github.com/chillley/images/blob/main/misty/app2.jpg?raw=true)
-![image](https://github.com/chillley/images/blob/main/misty/app3.jpg?raw=true)
-![image](https://github.com/chillley/images/blob/main/misty/app4.jpg?raw=true)
-![image](https://github.com/chillley/images/blob/main/misty/app5.jpg?raw=true)
-![image](https://github.com/chillley/images/blob/main/misty/app6.jpg?raw=true)
-![image](https://github.com/chillley/images/blob/main/misty/app7.jpg?raw=true)
+<img src="https://github.com/chillley/images/blob/main/misty/app1.jpg?raw=true" width="140">
+<img src="https://github.com/chillley/images/blob/main/misty/app2.jpg?raw=true" width="140">
+<img src="https://github.com/chillley/images/blob/main/misty/app3.jpg?raw=true" width="140">
+<img src="https://github.com/chillley/images/blob/main/misty/app4.jpg?raw=true" width="140">
+<img src="https://github.com/chillley/images/blob/main/misty/app5.jpg?raw=true" width="140">
+<img src="https://github.com/chillley/images/blob/main/misty/app6.jpg?raw=true" width="140">
+<img src="https://github.com/chillley/images/blob/main/misty/app7.jpg?raw=true" width="140">
 
 ### 项目结构
 
