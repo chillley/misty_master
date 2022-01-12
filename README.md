@@ -33,8 +33,9 @@
 └── main.dart                  # main
 ```
 
-### 安卓扫码体验
-![image](https://raw.githubusercontent.com/chillley/images/main/misty/download.png)
+[comment]: <> (### 安卓扫码体验)
+
+[comment]: <> (![image]&#40;https://raw.githubusercontent.com/chillley/images/main/misty/download.png&#41;)
 ### IOS
 ios因为没有开发者帐号，可自行下载代码编译体验
 
