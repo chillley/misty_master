@@ -57,6 +57,7 @@ class MinePage extends StatelessWidget {
             ),
             _buildItem(context, Icons.settings, '应用设置'),
             _buildItem(context, Icons.construction, '数据管理'),
+            _buildItem(context, Icons.history, '历史记录'),
             _buildItem(context, Icons.collections, '我的收藏'),
             const Divider(
               height: 1,
