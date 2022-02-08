@@ -147,7 +147,7 @@ packages:
       name: decimal
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.0"
+    version: "1.5.0"
   dio:
     dependency: "direct main"
     description:
@@ -414,7 +414,7 @@ packages:
       name: rational
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.0"
+    version: "1.2.1"
   shared_preferences:
     dependency: transitive
     description:
